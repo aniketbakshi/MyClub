@@ -4,7 +4,7 @@ package com.example.myclub.LoginFrag;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
@@ -23,7 +23,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -31,9 +30,9 @@ import android.widget.TextView;
 
 import com.example.myclub.AuthModel.LoginEvent;
 import com.example.myclub.Beans.UserPassBeans;
-import com.example.myclub.CustomToast;
+import com.example.myclub.Utils.CustomToast;
 import com.example.myclub.R;
-import com.example.myclub.Utils;
+import com.example.myclub.Utils.Utils;
 
 public class Login_Fragment extends Fragment implements OnClickListener {
     private static View view;
@@ -77,7 +76,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 R.anim.shake);
 
         // Setting text selector over textviews
-        XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
+        @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
         try {
             ColorStateList csl = ColorStateList.createFromXml(getResources(),
                     xrp);

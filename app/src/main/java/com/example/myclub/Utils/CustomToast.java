@@ -1,4 +1,4 @@
-package com.example.myclub;
+package com.example.myclub.Utils;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.myclub.R;
 
 public class CustomToast {
 

@@ -1,4 +1,4 @@
-package com.example.myclub;
+package com.example.myclub.Utils;
 
 public class Utils
 {
