@@ -1,11 +1,16 @@
 package com.example.myclub;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.myclub.LoginFrag.Login_Fragment;
 
 public class MainActivity extends AppCompatActivity {
     private static FragmentManager fragmentManager;
@@ -15,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
+//        checkPermission_club();
 
         // If savedinstnacestate is null then replace login fragment
         if (savedInstanceState == null) {
@@ -38,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Replace Login Fragment with animation
-    protected void replaceLoginFragment() {
+    public void replaceLoginFragment() {
         fragmentManager
                 .beginTransaction()
                 .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
@@ -66,4 +72,11 @@ public class MainActivity extends AppCompatActivity {
         else
             super.onBackPressed();
     }
+
+//    private void checkPermission_club() {
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+//            // Ask for permission
+//
+//        }
+//    }
 }

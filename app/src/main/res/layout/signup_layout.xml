@@ -13,7 +13,8 @@
         android:text="@string/signUp"
         android:textColor="@color/white_greyish"
         android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/scriptin"/>
 
     <EditText
         android:id="@+id/fullName"
@@ -82,15 +83,15 @@
         android:background="@color/white_greyish" />
 
     <EditText
-        android:id="@+id/location"
+        android:id="@+id/RegdNo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:background="@android:color/transparent"
-        android:drawableLeft="@drawable/location"
+        android:drawableLeft="@drawable/reg"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
-        android:hint="@string/location"
+        android:hint="@string/regdno"
         android:inputType="textCapWords"
         android:padding="10dp"
         android:singleLine="true"
