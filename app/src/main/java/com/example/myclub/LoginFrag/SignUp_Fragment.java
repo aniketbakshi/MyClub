@@ -2,8 +2,6 @@ package com.example.myclub.LoginFrag;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
@@ -15,20 +13,18 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.myclub.AuthModel.RegisterEvent;
-import com.example.myclub.Beans.RegisterBeans;
-import com.example.myclub.Beans.UserPassBeans;
-import com.example.myclub.Utils.CustomToast;
-import com.example.myclub.Activity.MainActivity;
+import com.example.myclub.CustomToast;
+import com.example.myclub.MainActivity;
 import com.example.myclub.R;
-import com.example.myclub.Utils.Utils;
+import com.example.myclub.Utils;
 
 public class SignUp_Fragment extends Fragment implements OnClickListener {
     private static View view;
-    private static EditText fullName, emailId, mobileNumber, regd,
+    private static EditText fullName, emailId, mobileNumber, location,
             password, confirmPassword;
     private static TextView login;
     private static Button signUpButton;
@@ -52,7 +48,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         fullName = (EditText) view.findViewById(R.id.fullName);
         emailId = (EditText) view.findViewById(R.id.userEmailId);
         mobileNumber = (EditText) view.findViewById(R.id.mobileNumber);
-        regd = (EditText) view.findViewById(R.id.RegdNo);
+        location = (EditText) view.findViewById(R.id.RegdNo);
         password = (EditText) view.findViewById(R.id.password);
         confirmPassword = (EditText) view.findViewById(R.id.confirmPassword);
         signUpButton = (Button) view.findViewById(R.id.signUpBtn);
@@ -60,7 +56,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         terms_conditions = (CheckBox) view.findViewById(R.id.terms_conditions);
 
         // Setting text selector over textviews
-        @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
+        XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
         try {
             ColorStateList csl = ColorStateList.createFromXml(getResources(),
                     xrp);
@@ -102,7 +98,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         String getFullName = fullName.getText().toString();
         String getEmailId = emailId.getText().toString();
         String getMobileNumber = mobileNumber.getText().toString();
-        String getRegd = regd.getText().toString();
+        String getLocation = location.getText().toString();
         String getPassword = password.getText().toString();
         String getConfirmPassword = confirmPassword.getText().toString();
 
@@ -114,7 +110,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         if (getFullName.equals("") || getFullName.length() == 0
                 || getEmailId.equals("") || getEmailId.length() == 0
                 || getMobileNumber.equals("") || getMobileNumber.length() == 0
-                || getRegd.equals("") || getRegd.length() == 0
+                || getLocation.equals("") || getLocation.length() == 0
                 || getPassword.equals("") || getPassword.length() == 0
                 || getConfirmPassword.equals("")
                 || getConfirmPassword.length() == 0)
@@ -138,12 +134,9 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                     "Please select Terms and Conditions.");
 
             // Else do signup or do your stuff
-        else {
-//            Toast.makeText(getActivity(), "Do SignUp.", Toast.LENGTH_SHORT).show();
-            RegisterBeans registerBeans = new RegisterBeans(getFullName, getMobileNumber,
-                    getRegd, new UserPassBeans(getEmailId, getPassword));
-            RegisterEvent registerEvent = new RegisterEvent(this);
-            registerEvent.register(registerBeans, view);
-        }
+        else
+            Toast.makeText(getActivity(), "Do SignUp.", Toast.LENGTH_SHORT)
+                    .show();
+
     }
 }

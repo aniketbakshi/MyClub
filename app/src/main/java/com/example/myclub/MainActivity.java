@@ -1,15 +1,16 @@
-package com.example.myclub.Activity;
+package com.example.myclub;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.myclub.LoginFrag.Login_Fragment;
-import com.example.myclub.R;
-import com.example.myclub.Utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
     private static FragmentManager fragmentManager;
