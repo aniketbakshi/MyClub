@@ -9,6 +9,8 @@ import com.example.myclub.AuthPresenter.UserPassInterface;
 import com.example.myclub.Beans.UserPassBeans;
 import com.example.myclub.LoginFrag.Login_Fragment;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class LoginEvent implements UserPassInterface {
@@ -36,6 +38,23 @@ public class LoginEvent implements UserPassInterface {
 
     @Override
     public void checkAdmin() {
-
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        String uid = auth.getUid();
+        assert uid != null;
+        firestore.collection("Admins").document(uid).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot snapshot = task.getResult();
+                        assert snapshot != null;
+                        if (snapshot.exists()) {
+                            boolean isAdmin = (boolean) snapshot.getData().get("isAdmin");
+                            Log.w("LoginEvent Admin Result", "isAdmin" + isAdmin);
+                        } else {
+                            Log.w("LoginEvent Admin Result", "Not Admin");
+                        }
+                    } else {
+                        Log.w("LoginEvent Admin Result", "Doesn't exists");
+                    }
+                });
     }
 }
