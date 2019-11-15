@@ -17,6 +17,7 @@ public class LoginEvent implements UserPassInterface {
 
     private Login_Fragment loginFragment;
     private FirebaseAuth auth;
+    private boolean check;
     public LoginEvent(Login_Fragment login_fragment){
         this.loginFragment = login_fragment;
     }
@@ -28,7 +29,10 @@ public class LoginEvent implements UserPassInterface {
                 .addOnCompleteListener(loginFragment.getActivity(), task -> {
                     if (task.isSuccessful()) {
                         Log.w("LoginEvent Result", "Success");
+                        boolean isAdmin = checkAdmin();
                         Toast.makeText(loginFragment.getActivity(), "Success", Toast.LENGTH_SHORT).show();
+                        loginFragment.onConnectionResult(isAdmin);
+
                     } else {
                         Log.w("LoginEvent Result", "Failed");
                         Toast.makeText(loginFragment.getActivity(), "Failed", Toast.LENGTH_SHORT).show();
@@ -37,7 +41,7 @@ public class LoginEvent implements UserPassInterface {
     }
 
     @Override
-    public void checkAdmin() {
+    public boolean checkAdmin() {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         String uid = auth.getUid();
         assert uid != null;
@@ -49,12 +53,16 @@ public class LoginEvent implements UserPassInterface {
                         if (snapshot.exists()) {
                             boolean isAdmin = (boolean) snapshot.getData().get("isAdmin");
                             Log.w("LoginEvent Admin Result", "isAdmin" + isAdmin);
+                            check = isAdmin;
                         } else {
                             Log.w("LoginEvent Admin Result", "Not Admin");
+                            check = false;
                         }
                     } else {
                         Log.w("LoginEvent Admin Result", "Doesn't exists");
+                        check = false;
                     }
                 });
+        return check;
     }
 }

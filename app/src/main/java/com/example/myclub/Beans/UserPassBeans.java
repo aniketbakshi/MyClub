@@ -1,8 +1,12 @@
 package com.example.myclub.Beans;
 
 public class UserPassBeans {
-    private String uname;
-    private String pass;
+    String uname;
+    String pass;
+
+    public UserPassBeans() {
+
+    }
 
     public String getUname() {
         return uname;

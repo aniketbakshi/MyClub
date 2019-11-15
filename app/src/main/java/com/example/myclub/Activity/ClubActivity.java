@@ -2,6 +2,9 @@ package com.example.myclub.Activity;
 
 import android.os.Bundle;
 
+import com.example.myclub.Beans.RegisterBeans;
+import com.example.myclub.ClubModel.ClubEvent;
+import com.example.myclub.ClubView.ClubView;
 import com.example.myclub.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -22,7 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 
-public class ClubActivity extends AppCompatActivity {
+public class ClubActivity extends AppCompatActivity implements ClubView {
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -52,6 +55,8 @@ public class ClubActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        ClubEvent event = new ClubEvent(this);
+        event.getClubUserDetail();
     }
 
     @Override
@@ -66,5 +71,10 @@ public class ClubActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onGetDataResult(RegisterBeans beans) {
+
     }
 }

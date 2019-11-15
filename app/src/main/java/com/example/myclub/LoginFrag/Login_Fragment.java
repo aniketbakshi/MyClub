@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,13 +30,15 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.myclub.Activity.ClubActivity;
 import com.example.myclub.AuthModel.LoginEvent;
+import com.example.myclub.AuthView.UserPassInterface;
 import com.example.myclub.Beans.UserPassBeans;
 import com.example.myclub.Utils.CustomToast;
 import com.example.myclub.R;
 import com.example.myclub.Utils.Utils;
 
-public class Login_Fragment extends Fragment implements OnClickListener {
+public class Login_Fragment extends Fragment implements OnClickListener, UserPassInterface {
     private static View view;
 
     private static EditText emailid, password;
@@ -190,5 +194,12 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             loginEvent.loginWithEmail(userPassBeans, view);
         }
 
+    }
+
+    @Override
+    public void onConnectionResult(boolean isAdmin) {
+        Intent intent = new Intent(this.getActivity(), ClubActivity.class);
+        Log.w("LoginFrag", "Admin: " + isAdmin);
+        startActivity(intent);
     }
 }

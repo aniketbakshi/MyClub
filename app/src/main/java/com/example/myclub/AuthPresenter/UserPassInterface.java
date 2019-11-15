@@ -6,5 +6,5 @@ import com.example.myclub.Beans.UserPassBeans;
 
 public interface UserPassInterface {
     void loginWithEmail(UserPassBeans beans, View v);
-    void checkAdmin();
+    boolean checkAdmin();
 }
