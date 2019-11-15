@@ -11,13 +11,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class ClubEvent implements ClubUserInterface {
 
     private ClubActivity clubActivity;
+    FirebaseAuth auth;
     public ClubEvent(ClubActivity clubActivity) {
         this.clubActivity = clubActivity;
     }
 
     @Override
     public void getClubUserDetail() {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
         String uid = auth.getCurrentUser().getUid();
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         firestore.collection("Users")
@@ -27,5 +28,10 @@ public class ClubEvent implements ClubUserInterface {
                     Log.w("ClubEvent GetData", "got all the beans" + beans.fullName);
                     clubActivity.onGetDataResult(beans);
                 });
+    }
+
+    @Override
+    public void logout() {
+        auth.signOut();
     }
 }

@@ -51,7 +51,7 @@ public class ClubActivity extends AppCompatActivity implements ClubView {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_share, R.id.nav_send)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -59,6 +59,20 @@ public class ClubActivity extends AppCompatActivity implements ClubView {
         NavigationUI.setupWithNavController(navigationView, navController);
         ClubEvent event = new ClubEvent(this);
         event.getClubUserDetail();
+        navigationView.setNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.nav_logout:
+                    event.logout();
+                    ClubActivity.this.finish();
+                    break;
+                case R.id.nav_home:
+                    break;
+                case R.id.nav_gallery:
+                    break;
+            }
+            return true;
+        });
+
     }
 
     @Override
