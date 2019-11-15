@@ -25,6 +25,7 @@ public class ClubEvent implements ClubUserInterface {
                 .addOnSuccessListener(clubActivity, task -> {
                     RegisterBeans beans = task.toObject(RegisterBeans.class);
                     Log.w("ClubEvent GetData", "got all the beans" + beans.fullName);
+                    clubActivity.onGetDataResult(beans);
                 });
     }
 }
