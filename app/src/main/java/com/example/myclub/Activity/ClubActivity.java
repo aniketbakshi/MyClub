@@ -2,6 +2,8 @@ package com.example.myclub.Activity;
 
 import android.os.Bundle;
 
+import com.example.myclub.Activity.ui.gallery.GalleryFragment;
+import com.example.myclub.Activity.ui.home.HomeFragment;
 import com.example.myclub.Beans.RegisterBeans;
 import com.example.myclub.ClubModel.ClubEvent;
 import com.example.myclub.ClubView.ClubView;
@@ -9,8 +11,13 @@ import com.example.myclub.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -31,6 +38,7 @@ public class ClubActivity extends AppCompatActivity implements ClubView {
     private AppBarConfiguration mAppBarConfiguration;
     private TextView navHeader;
     private TextView navSub;
+    private ClubEvent event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,27 +59,14 @@ public class ClubActivity extends AppCompatActivity implements ClubView {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_logout)
+                R.id.nav_home, R.id.nav_gallery)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        ClubEvent event = new ClubEvent(this);
+        event = new ClubEvent(this);
         event.getClubUserDetail();
-        navigationView.setNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.nav_logout:
-                    event.logout();
-                    ClubActivity.this.finish();
-                    break;
-                case R.id.nav_home:
-                    break;
-                case R.id.nav_gallery:
-                    break;
-            }
-            return true;
-        });
 
     }
 
@@ -80,6 +75,19 @@ public class ClubActivity extends AppCompatActivity implements ClubView {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.club, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                break;
+            case R.id.action_logout:
+                event.logout();
+                ClubActivity.this.finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
