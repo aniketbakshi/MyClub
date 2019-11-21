@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -48,6 +49,7 @@ public class Login_Fragment extends Fragment implements OnClickListener, UserPas
     private static LinearLayout loginLayout;
     private static Animation shakeAnimation;
     private static FragmentManager fragmentManager;
+    LoginEvent loginEvent;
 
     public Login_Fragment() {
 
@@ -190,16 +192,15 @@ public class Login_Fragment extends Fragment implements OnClickListener, UserPas
         else {
             //Toast.makeText(getActivity(), "Do Login.", Toast.LENGTH_SHORT).show();
             UserPassBeans userPassBeans = new UserPassBeans(getEmailId, getPassword);
-            LoginEvent loginEvent = new LoginEvent(this);
+            loginEvent = new LoginEvent(this);
             loginEvent.loginWithEmail(userPassBeans, view);
         }
 
     }
 
     @Override
-    public void onConnectionResult(boolean isAdmin) {
+    public void onConnectionResult() {
         Intent intent = new Intent(this.getActivity(), ClubActivity.class);
-        Log.w("LoginFrag", "Admin: " + isAdmin);
         startActivity(intent);
     }
 }
