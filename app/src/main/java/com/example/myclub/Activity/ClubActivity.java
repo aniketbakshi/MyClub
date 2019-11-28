@@ -6,11 +6,6 @@ import com.example.myclub.Beans.RegisterBeans;
 import com.example.myclub.ClubModel.ClubEvent;
 import com.example.myclub.ClubView.ClubView;
 import com.example.myclub.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import android.view.View;
-
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -38,14 +33,6 @@ public class ClubActivity extends AppCompatActivity implements ClubView {
         setContentView(R.layout.activity_club);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -59,19 +46,6 @@ public class ClubActivity extends AppCompatActivity implements ClubView {
         NavigationUI.setupWithNavController(navigationView, navController);
         ClubEvent event = new ClubEvent(this);
         event.getClubUserDetail();
-        navigationView.setNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.nav_logout:
-                    event.logout();
-                    ClubActivity.this.finish();
-                    break;
-                case R.id.nav_home:
-                    break;
-                case R.id.nav_gallery:
-                    break;
-            }
-            return true;
-        });
 
     }
 
