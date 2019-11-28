@@ -29,4 +29,5 @@
     <string name="menu_home">My Club</string>
     <string name="menu_gallery">Join Club</string>
     <string name="menu_logout">Log Out</string>
+    <string name="welcome">Welcome,</string>
 </resources>
