@@ -37,6 +37,7 @@ public class ClubActivity extends AppCompatActivity implements ClubView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club);
         Toolbar toolbar = findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

@@ -8,6 +8,8 @@ import com.example.myclub.ClubPresenter.ClubUserInterface;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.List;
+
 public class ClubEvent implements ClubUserInterface {
 
     private ClubActivity clubActivity;

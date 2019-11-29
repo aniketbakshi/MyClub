@@ -12,6 +12,8 @@ import com.example.myclub.LoginFrag.Login_Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.List;
+
 
 public class LoginEvent implements UserPassInterface {
 
@@ -37,19 +39,5 @@ public class LoginEvent implements UserPassInterface {
                         Toast.makeText(loginFragment.getActivity(), "Failed", Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-
-    @Override
-    public boolean checkAdmin() {
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        String uid = auth.getUid();
-        assert uid != null;
-        firestore.collection("Admins").document(uid).get()
-                .addOnSuccessListener(task -> {
-                    AdminBeans beans = task.toObject(AdminBeans.class);
-                    Log.w("LoginEvent Admin", "" + beans.isAdmin + " " + beans.Club);
-                });
-
-        return check;
     }
 }

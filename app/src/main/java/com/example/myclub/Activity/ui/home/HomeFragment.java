@@ -1,6 +1,7 @@
 package com.example.myclub.Activity.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,25 +12,40 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myclub.Beans.NotificationBeans;
+import com.example.myclub.ClubModel.NotificationEvent;
+import com.example.myclub.ClubView.NotificationView;
 import com.example.myclub.R;
+import com.example.myclub.Utils.CustomAdapter;
 
-public class HomeFragment extends Fragment {
+import java.util.ArrayList;
 
-    private HomeViewModel homeViewModel;
+public class HomeFragment extends Fragment implements NotificationView {
 
+    private RecyclerView recyclerView;
+    private TextView textView;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        NotificationEvent event = new NotificationEvent(this);
+        event.setNotifications();
+
+        textView = root.findViewById(R.id.text_home);
+        recyclerView = root.findViewById(R.id.recycler_view);
+        LinearLayoutManager manager = new LinearLayoutManager(root.getContext());
+        recyclerView.setLayoutManager(manager);
         return root;
+    }
+
+    @Override
+    public void setNotificationList(ArrayList<NotificationBeans> beans, String club) {
+        textView.setText(club);
+        CustomAdapter adapter = new CustomAdapter(beans);
+        recyclerView.setAdapter(adapter);
     }
 }

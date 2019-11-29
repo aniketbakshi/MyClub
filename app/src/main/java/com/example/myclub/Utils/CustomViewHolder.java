@@ -10,8 +10,10 @@ import com.example.myclub.R;
 
 public class CustomViewHolder extends RecyclerView.ViewHolder {
     TextView subtitle;
+    TextView title;
     public CustomViewHolder(@NonNull View itemView) {
         super(itemView);
         this.subtitle = itemView.findViewById(R.id.tv_subtitle);
+        this.title = itemView.findViewById(R.id.tv_title);
     }
 }
